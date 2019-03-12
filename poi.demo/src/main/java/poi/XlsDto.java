@@ -20,7 +20,6 @@ public class XlsDto {
 	//客户满意度
 	private String desc;
 	
-	
 	@Override
 	public String toString() {
 		return "XlsDto [type=" + type + ", name=" + name + ", stardate=" + stardate + ", enddate=" + enddate + ", days="
