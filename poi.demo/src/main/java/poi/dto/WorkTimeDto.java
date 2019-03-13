@@ -15,6 +15,12 @@ public class WorkTimeDto {
 	private String thursday;//星期四
 	
 	private String friday;//星期五
+	
+	@Override
+	public String toString() {
+		return "WorkTimeDto [saturday=" + saturday + ", sunday=" + sunday + ", monday=" + monday + ", tuesday="
+				+ tuesday + ", wednesday=" + wednesday + ", thursday=" + thursday + ", friday=" + friday + "]";
+	}
 
 	public String getSaturday() {
 		return saturday;
