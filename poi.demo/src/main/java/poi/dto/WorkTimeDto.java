@@ -1,4 +1,4 @@
-package poi;
+package poi.dto;
 
 public class WorkTimeDto {
 	

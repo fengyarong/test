@@ -2,12 +2,12 @@ package Util;
 
 import org.apache.poi.xssf.usermodel.XSSFRow;
 
-import poi.CellType;
+import poi.dto.CellTypeDto;
 
 public class CellUtil {
 	
-	public CellType getTpye(XSSFRow row){
-		CellType type =new CellType();
+	public CellTypeDto getTpye(XSSFRow row){
+		CellTypeDto type =new CellTypeDto();
 		type.setXssf0(row.getCell(0).getCellStyle());
 		type.setXssf1(row.getCell(1).getCellStyle());
 		type.setXssf2(row.getCell(2).getCellStyle());

@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class DateUtil {
 
-	public static boolean jdugeDate(Date date){
+	public static boolean jdugeBeforeDate(Date date){
 		Date now =new Date();
 		Calendar calendar =Calendar.getInstance();
 		calendar.setTime(now);
@@ -36,6 +36,18 @@ public class DateUtil {
 		long startime = star.getTime();
 		long i=(nowtime-startime)/3600000/24;
 		return i;
+	}
+	
+	public static boolean jdugeAfterDate(Date date){
+		Date now =new Date();
+		Calendar calendar =Calendar.getInstance();
+		calendar.setTime(now);
+		calendar.add(Calendar.DATE, +7);//一周以内判断
+		if(date.after(calendar.getTime())||date.before(now)){
+			//表示日期不在本周以内
+			return true;
+		}
+		return false;
 	}
 	
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package poi;
+package poi.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +18,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ENUM.ENUM_CATEGORY;
 import Util.CellUtil;
 import Util.SaveUtil;
+import Util.StringUtil;
+import poi.dto.CellTypeDto;
+import poi.dto.WorkTimeDto;
+import poi.dto.XlsDto;
 
 public class Controller {
 
@@ -50,7 +54,7 @@ public class Controller {
 		Sheet sheet = hw.getSheetAt(num);
 		for (int i = 2; i <= sheet.getLastRowNum(); i++) {
 			Row row = sheet.getRow(i);
-			if (!"".equals(getCellValue(row.getCell(2)))) {
+			if (!"".equals(StringUtil.getCellValue(row.getCell(2)))) {
 				XlsDto xls = new XlsDto();
 				for (int j = 1; j <= 8; j++) {
 					Cell cell = row.getCell(j);
@@ -96,7 +100,7 @@ public class Controller {
 		Sheet sheet = hw.getSheetAt(num);// 查詢第二頁
 		for (int i = 2; i <= sheet.getLastRowNum(); i++) {
 			Row row = sheet.getRow(i);
-			if (!"".equals(getCellValue(row.getCell(6)))) {
+			if (!"".equals(StringUtil.getCellValue(row.getCell(6)))) {
 				XlsDto xls = new XlsDto();
 				for (int j = 1; j <= 6; j++) {
 					Cell cell = row.getCell(j);
@@ -138,7 +142,7 @@ public class Controller {
 		FileInputStream fs = new FileInputStream(ouPath);
 		XSSFWorkbook wb = new XSSFWorkbook(fs);
 		XSSFSheet sheet = wb.getSheetAt(integer);
-		CellType tpye = cellUtil.getTpye(sheet.getRow(3));
+		CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(3));
 		XSSFRow row = sheet.getRow(0);
 		int lastRowNum = sheet.getLastRowNum();
 		FileOutputStream out = new FileOutputStream(ouPath);
@@ -168,7 +172,7 @@ public class Controller {
 		FileInputStream fs = new FileInputStream(ouPath);
 		XSSFWorkbook wb = new XSSFWorkbook(fs);
 		XSSFSheet sheet = wb.getSheetAt(integer);
-		CellType tpye = cellUtil.getTpye(sheet.getRow(3));
+		CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(3));
 		XSSFRow row = sheet.getRow(0);
 		int lastRowNum = sheet.getLastRowNum();
 		FileOutputStream out = new FileOutputStream(ouPath);
@@ -190,20 +194,4 @@ public class Controller {
 		System.out.println("Next写入完毕");
 	}
 	
-	public String getCellValue(Cell cell) {
-		if (cell == null) {
-			return "";
-		}
-		// 如果是boolean
-		if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
-			return String.valueOf(cell.getBooleanCellValue());
-		}
-		// 如果是数字类型
-		if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-			return String.valueOf(cell.getNumericCellValue());
-		}
-		// 如果是String类型
-		return String.valueOf(cell.getStringCellValue());
-	}
-
 }

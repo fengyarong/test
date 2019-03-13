@@ -1,8 +1,8 @@
-package poi;
+package poi.dto;
 
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 
-public class CellType {
+public class CellTypeDto {
 	private XSSFCellStyle xssf0;
 	private XSSFCellStyle xssf1;
 	private XSSFCellStyle xssf2;

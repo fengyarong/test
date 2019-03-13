@@ -23,7 +23,7 @@ public class SaveUtil {
 	public void SaveMethod(Date object, XSSFCellStyle xssfCellStyle, XSSFCell xssfCell) {
 		xssfCell.setCellValue(object);
 		XSSFCellStyle myxssf = (XSSFCellStyle) xssfCellStyle.clone();
-		if(DateUtil.jdugeDate(object)){
+		if(DateUtil.jdugeBeforeDate(object)){
 			//添加背景色为红色
 			myxssf.setFillForegroundColor(IndexedColors.RED.getIndex());
 			myxssf.setFillPattern(CellStyle.SOLID_FOREGROUND);
