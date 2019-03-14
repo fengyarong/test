@@ -23,7 +23,7 @@ public class DateUtil {
 	 * 求今年開始度過了多少天
 	 * @return
 	 */
-	public static long getDaysFromStar(){
+	public static int getDaysFromStar(){
 		Date now =new Date();
 		Date star=null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -35,7 +35,7 @@ public class DateUtil {
 		long nowtime = now.getTime();
 		long startime = star.getTime();
 		long i=(nowtime-startime)/3600000/24;
-		return i;
+		return (int) i;
 	}
 	
 	public static boolean jdugeAfterDate(Date date){

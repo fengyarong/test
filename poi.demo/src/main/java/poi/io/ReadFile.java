@@ -1,6 +1,5 @@
 package poi.io;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.LinkedHashSet;
@@ -17,7 +16,7 @@ import poi.dto.WorkTimeDto;
 import poi.dto.XlsDto;
 
 public class ReadFile {
-	
+
 	public static void readSecondPage(String path, LinkedHashSet<XlsDto> list, int page) throws Exception {
 		InputStream is = new FileInputStream(path);
 		XSSFWorkbook hw = new XSSFWorkbook(is);
@@ -62,11 +61,11 @@ public class ReadFile {
 		}
 		is.close();
 	}
-	
+
 	public static void readThirdPage(String path, LinkedHashSet<XlsDto> list, int page) throws Exception {
 		InputStream is = new FileInputStream(path);
 		XSSFWorkbook hw = new XSSFWorkbook(is);
-		Sheet sheet = hw.getSheetAt(page);// ²éÔƒµÚ¶þí“
+		Sheet sheet = hw.getSheetAt(page);
 		for (int i = 2; i <= sheet.getLastRowNum(); i++) {
 			Row row = sheet.getRow(i);
 			if (!"".equals(StringUtil.getCellValue(row.getCell(6)))) {
@@ -102,50 +101,43 @@ public class ReadFile {
 		}
 		is.close();
 	}
-	
-	public static void readFourthPage(String addresspath,Map<String, WorkTimeDto> map,int page)throws Exception{
-		File file = new File(addresspath);
-		File[] listFiles = file.listFiles();
-		for (File myfile : listFiles) {
-			if (myfile.isFile()) {
-				String path = myfile.getPath();
-				String name = path.substring(path.lastIndexOf("-")+1,path.lastIndexOf("."));
-				InputStream is = new FileInputStream(path);
-				WorkTimeDto workDto =new WorkTimeDto();
-				XSSFWorkbook hw = new XSSFWorkbook(is);
-				Sheet sheet = hw.getSheetAt(3);
-				long num = DateUtil.getDaysFromStar()+4;
-				for (long i = num-7; i <num; i++) {
-					int ca=(int) (num-i);
-					Row row = sheet.getRow((int)i);
-					Cell cell = row.getCell(1);
-					switch (ca) {
-					case 7:
-						workDto.setSunday(StringUtil.getCellValue(cell));
-						break;
-					case 6:
-						workDto.setSaturday(StringUtil.getCellValue(cell));
-						break;
-					case 5:
-						workDto.setFriday(StringUtil.getCellValue(cell));
-						break;
-					case 4:
-						workDto.setThursday(StringUtil.getCellValue(cell));	
-						break;
-					case 3:
-						workDto.setWednesday(StringUtil.getCellValue(cell));		
-						break;
-					case 2:
-						workDto.setTuesday(StringUtil.getCellValue(cell));		
-						break;
-					case 1:
-						workDto.setMonday(StringUtil.getCellValue(cell));			
-						break;	
-					}
-				}
-				map.put(name, workDto);
-				is.close();
+
+	public static void readFourthPage(String path, Map<String, WorkTimeDto> map, int page) throws Exception {
+		String name = path.substring(path.lastIndexOf("-") + 1, path.lastIndexOf("."));
+		InputStream is = new FileInputStream(path);
+		WorkTimeDto workDto = new WorkTimeDto();
+		XSSFWorkbook hw = new XSSFWorkbook(is);
+		Sheet sheet = hw.getSheetAt(3);
+		int num = DateUtil.getDaysFromStar() + 4;
+		for (int i = num - 7; i < num; i++) {
+			int ca = num - i;
+			Row row = sheet.getRow((int) i);
+			Cell cell = row.getCell(1);
+			switch (ca) {
+			case 7:
+				workDto.setSunday(StringUtil.getCellValue(cell));
+				break;
+			case 6:
+				workDto.setSaturday(StringUtil.getCellValue(cell));
+				break;
+			case 5:
+				workDto.setFriday(StringUtil.getCellValue(cell));
+				break;
+			case 4:
+				workDto.setThursday(StringUtil.getCellValue(cell));
+				break;
+			case 3:
+				workDto.setWednesday(StringUtil.getCellValue(cell));
+				break;
+			case 2:
+				workDto.setTuesday(StringUtil.getCellValue(cell));
+				break;
+			case 1:
+				workDto.setMonday(StringUtil.getCellValue(cell));
+				break;
 			}
 		}
+		map.put(name, workDto);
+		is.close();
 	}
 }

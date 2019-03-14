@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import Util.CellUtil;
+import Util.DateUtil;
 import Util.SaveUtil;
 import Util.StringUtil;
 import poi.dto.CellTypeDto;
@@ -78,7 +80,7 @@ public class WriteFile {
 		System.out.println("Third写入完毕");
 	}
 	
-	public static void writeFourthPage(String ouPath,Map<String, WorkTimeDto> map, Integer integer)throws Exception{
+	public static void writeFourthPage(Map<String, WorkTimeDto> map,String ouPath, Integer integer)throws Exception{
 		
 		Map<String,Integer> nameMap=new HashMap<String,Integer>();
 		
@@ -92,18 +94,92 @@ public class WriteFile {
 				nameMap.put(StringUtil.getCellValue(row.getCell(i)), i);
 			}
 		}
-		System.out.println(nameMap);
+		//遍历需要写入的姓名，找出其对应的位置
+		FileOutputStream out = new FileOutputStream(ouPath);
+		for (String name : map.keySet()) {
+			Integer addnum = nameMap.get(name);
+			WorkTimeDto workTimeDto = map.get(name);
+			int num = DateUtil.getDaysFromStar()+4;
+			for (int i = num-7; i < num; i++) {
+				int ca=num-i;
+				System.out.println(i);
+				XSSFCell cell = sheet.getRow(i).getCell(addnum);
+				switch (ca) {
+				case 7:
+					if(StringUtil.isNumeric(workTimeDto.getSunday())){
+						cell.setCellValue(Double.parseDouble(workTimeDto.getSunday()));
+					}else{
+						cell.setCellValue(workTimeDto.getSunday());
+					}
+					break;
+				case 6:
+					if(StringUtil.isNumeric(workTimeDto.getSaturday())){
+						cell.setCellValue(Double.parseDouble(workTimeDto.getSaturday()));
+					}else{
+						cell.setCellValue(workTimeDto.getSaturday());
+					}
+					break;
+				case 5:
+					if(StringUtil.isNumeric(workTimeDto.getFriday())){
+						cell.setCellValue(Double.parseDouble(workTimeDto.getFriday()));
+					}else{
+						cell.setCellValue(workTimeDto.getFriday());
+					}
+					break;
+				case 4:
+					if(StringUtil.isNumeric(workTimeDto.getThursday())){
+						cell.setCellValue(Double.parseDouble(workTimeDto.getThursday()));
+					}else{
+						cell.setCellValue(workTimeDto.getThursday());
+					}
+					break;
+				case 3:
+					if(StringUtil.isNumeric(workTimeDto.getWednesday())){
+						cell.setCellValue(Double.parseDouble(workTimeDto.getWednesday()));
+					}else{
+						cell.setCellValue(workTimeDto.getWednesday());
+					}
+					break;
+				case 2:
+					if(StringUtil.isNumeric(workTimeDto.getTuesday())){
+						cell.setCellValue(Double.parseDouble(workTimeDto.getTuesday()));
+					}else{
+						cell.setCellValue(workTimeDto.getTuesday());
+					}
+					break;
+				case 1:
+					if(StringUtil.isNumeric(workTimeDto.getMonday())){
+						cell.setCellValue(Double.parseDouble(workTimeDto.getMonday()));
+					}else{
+						cell.setCellValue(workTimeDto.getMonday());
+					}
+					break;	
+				}
+			}
+			
+		}
+		out.flush();
+		wb.write(out);
+		out.close();
 		fs.close();
 		System.out.println("Fourth写入完毕");
 	}
 	
 	public static void main(String[] args) {
-		String ouPath="D:\\Config\\LI-国宝人寿-PMC-周报-20190301.xls";
-		int page=3;
-		try {
-			writeFourthPage(ouPath,null,page);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		String ouPath="D:\\Config\\LI-国宝人寿-PMC-周报-20190301.xls";
+//		int page=3;
+//		WorkTimeDto w =new WorkTimeDto();
+//		w.setMonday("9.2");
+//		w.setTuesday("9.5");
+//		w.setWednesday("9");
+//		w.setThursday("9.8");
+//		w.setFriday("请假");
+//		Map<String, WorkTimeDto> map =new HashMap<String, WorkTimeDto>();
+//		map.put("赵政", w);
+//		try {
+//			writeFourthPage(ouPath,map,page);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 }
