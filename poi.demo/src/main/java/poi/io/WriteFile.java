@@ -28,7 +28,7 @@ public class WriteFile {
 		FileInputStream fs = new FileInputStream(ouPath);
 		XSSFWorkbook wb = new XSSFWorkbook(fs);
 		XSSFSheet sheet = wb.getSheetAt(integer);
-		CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(3));
+		CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(2));
 		XSSFRow row = sheet.getRow(0);
 		int lastRowNum = sheet.getLastRowNum();
 		FileOutputStream out = new FileOutputStream(ouPath);
@@ -37,8 +37,8 @@ public class WriteFile {
 			saveUtil.SaveMethod("1", tpye.getXssf0(), row.createCell(0));
 			saveUtil.SaveMethod(xlsDto.getType(), tpye.getXssf1(), row.createCell(1));
 			saveUtil.SaveMethod(xlsDto.getName(), tpye.getXssf2(), row.createCell(2));
-			saveUtil.SaveMethod(xlsDto.getStardate(), tpye.getXssf3(), row.createCell(3));
-			saveUtil.SaveMethod(xlsDto.getEnddate(), tpye.getXssf4(), row.createCell(4));
+			saveUtil.SaveMethodBefore(xlsDto.getStardate(), tpye.getXssf3(), row.createCell(3));
+			saveUtil.SaveMethodBefore(xlsDto.getEnddate(), tpye.getXssf4(), row.createCell(4));
 			saveUtil.SaveMethod(xlsDto.getDays(), tpye.getXssf5(), row.createCell(5));
 			saveUtil.SaveMethod(xlsDto.getDutyperson(), tpye.getXssf6(), row.createCell(6));
 			saveUtil.SaveMethod(xlsDto.getLv(), tpye.getXssf7(), row.createCell(7));
@@ -58,7 +58,7 @@ public class WriteFile {
 		FileInputStream fs = new FileInputStream(ouPath);
 		XSSFWorkbook wb = new XSSFWorkbook(fs);
 		XSSFSheet sheet = wb.getSheetAt(integer);
-		CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(3));
+		CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(2));
 		XSSFRow row = sheet.getRow(0);
 		int lastRowNum = sheet.getLastRowNum();
 		FileOutputStream out = new FileOutputStream(ouPath);
@@ -67,8 +67,8 @@ public class WriteFile {
 			saveUtil.SaveMethod("1", tpye.getXssf0(), row.createCell(0));
 			saveUtil.SaveMethod(xlsDto.getType(), tpye.getXssf1(), row.createCell(1));
 			saveUtil.SaveMethod(xlsDto.getName(), tpye.getXssf2(), row.createCell(2));
-			saveUtil.SaveMethod(xlsDto.getStardate(), tpye.getXssf3(), row.createCell(3));
-			saveUtil.SaveMethod(xlsDto.getEnddate(), tpye.getXssf4(), row.createCell(4));
+			saveUtil.SaveMethodAfter(xlsDto.getStardate(), tpye.getXssf3(), row.createCell(3));
+			saveUtil.SaveMethodAfter(xlsDto.getEnddate(), tpye.getXssf4(), row.createCell(4));
 			saveUtil.SaveMethod(xlsDto.getDays(), tpye.getXssf5(), row.createCell(5));
 			saveUtil.SaveMethod(xlsDto.getDutyperson(), tpye.getXssf6(), row.createCell(6));
 			saveUtil.SaveMethod("1", tpye.getXssf7(), row.createCell(7));
@@ -102,7 +102,6 @@ public class WriteFile {
 			int num = DateUtil.getDaysFromStar()+4;
 			for (int i = num-7; i < num; i++) {
 				int ca=num-i;
-				System.out.println(i);
 				XSSFCell cell = sheet.getRow(i).getCell(addnum);
 				switch (ca) {
 				case 7:
@@ -166,20 +165,20 @@ public class WriteFile {
 	}
 	
 	public static void main(String[] args) {
-//		String ouPath="D:\\Config\\LI-国宝人寿-PMC-周报-20190301.xls";
-//		int page=3;
-//		WorkTimeDto w =new WorkTimeDto();
-//		w.setMonday("9.2");
-//		w.setTuesday("9.5");
-//		w.setWednesday("9");
-//		w.setThursday("9.8");
-//		w.setFriday("请假");
-//		Map<String, WorkTimeDto> map =new HashMap<String, WorkTimeDto>();
-//		map.put("赵政", w);
-//		try {
-//			writeFourthPage(ouPath,map,page);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		String ouPath="D:\\Config\\LI-国宝人寿-PMC-周报-20190301.xls";
+		int page=3;
+		WorkTimeDto w =new WorkTimeDto();
+		w.setMonday("9.2");
+		w.setTuesday("9.5");
+		w.setWednesday("9");
+		w.setThursday("9.8");
+		w.setFriday("请假");
+		Map<String, WorkTimeDto> map =new HashMap<String, WorkTimeDto>();
+		map.put("赵政", w);
+		try {
+			writeFourthPage(map,ouPath,page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -20,7 +20,7 @@ public class SaveUtil {
 		xssfCell.setCellStyle(xssfCellStyle);
 	}
 	
-	public void SaveMethod(Date object, XSSFCellStyle xssfCellStyle, XSSFCell xssfCell) {
+	public void SaveMethodBefore(Date object, XSSFCellStyle xssfCellStyle, XSSFCell xssfCell) {
 		xssfCell.setCellValue(object);
 		XSSFCellStyle myxssf = (XSSFCellStyle) xssfCellStyle.clone();
 		if(DateUtil.jdugeBeforeDate(object)){
@@ -31,8 +31,25 @@ public class SaveUtil {
 		xssfCell.setCellStyle(myxssf);
 	}
 	
+	public void SaveMethodAfter(Date object, XSSFCellStyle xssfCellStyle, XSSFCell xssfCell) {
+		xssfCell.setCellValue(object);
+		XSSFCellStyle myxssf = (XSSFCellStyle) xssfCellStyle.clone();
+		if(DateUtil.jdugeAfterDate(object)){
+			//添加背景色为红色
+			myxssf.setFillForegroundColor(IndexedColors.RED.getIndex());
+			myxssf.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		}
+		xssfCell.setCellStyle(myxssf);
+	}
+	
 	public void SaveMethod(double object, XSSFCellStyle xssfCellStyle, XSSFCell xssfCell) {
 		xssfCell.setCellValue(object);
+		XSSFCellStyle myxssf = (XSSFCellStyle) xssfCellStyle.clone();
+		if(object>1.0){
+			//添加背景色为红色
+			myxssf.setFillForegroundColor(IndexedColors.RED.getIndex());
+			myxssf.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		}
 		xssfCell.setCellStyle(xssfCellStyle);
 	}
 	
