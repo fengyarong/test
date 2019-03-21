@@ -32,6 +32,15 @@ public class Controller {
 		LinkedHashSet<XlsDto> list_second = new LinkedHashSet<XlsDto>();
 		LinkedHashSet<XlsDto> list_third = new LinkedHashSet<XlsDto>();
 		Map<String, WorkTimeDto> map = new HashMap<String, WorkTimeDto>();
+
+		WorkTimeDto workTimeDto =new WorkTimeDto();
+		workTimeDto.setMonday("8");
+		workTimeDto.setThursday("8");
+		workTimeDto.setWednesday("8");
+		workTimeDto.setTuesday("8");
+		workTimeDto.setFriday("8");
+		map.put("Àî¿­",workTimeDto);
+
 		File file = new File(inPath);
 		File[] listFiles = file.listFiles();
 		for (File myfile : listFiles) {
