@@ -5,8 +5,8 @@ import poi.controller.Controller;
 public class Start {
 	
 	public static void main(String[] args) {
-		String inPath = "D:\\project_doc\\project-docs\\3_项目跟踪与监控\\50_个人周报\\2019\\201903\\20190315";// 文件地址
-		String ouPath = "D:\\Config\\LI-国宝人寿-PMC-周报-20190315.xls";// 輸出地址
+		String inPath = "D:\\project_doc\\project-docs\\3_椤圭洰璺熻釜涓庣洃鎺\50_涓汉鍛ㄦ姤\\2019\\201903\\20190322";// 鏂囦欢鍦板潃
+		String ouPath = "D:\\project_doc\\project-docs\\3_椤圭洰璺熻釜涓庣洃鎺\20_椤圭洰鍛ㄦ姤\\QA\\2019\\LI-鍥藉疂浜哄-PMC-鍛ㄦ姤-20190315.xls";// 杓稿嚭鍦板潃
 		Controller c =new Controller();
 		try {
 			c.doItBegin(inPath, ouPath);

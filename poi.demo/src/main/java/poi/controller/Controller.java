@@ -39,21 +39,21 @@ public class Controller {
 		workTimeDto.setWednesday("8");
 		workTimeDto.setTuesday("8");
 		workTimeDto.setFriday("8");
-		map.put("李凯",workTimeDto);
+		map.put("鏉庡嚡",workTimeDto);
 
 		File file = new File(inPath);
 		File[] listFiles = file.listFiles();
 		for (File myfile : listFiles) {
 			if (myfile.isFile()) {
-				System.out.println("开始读取："+myfile.getName());
-				ReadFile.readSecondPage(myfile.getPath(), list_second, ENUM_CATEGORY.LASTWEEK.code());
+				System.out.println("寮�濮嬭鍙栵細"+myfile.getName());
+//				ReadFile.readSecondPage(myfile.getPath(), list_second, ENUM_CATEGORY.LASTWEEK.code());
 				ReadFile.readThirdPage(myfile.getPath(), list_third, ENUM_CATEGORY.NEXTWEEK.code());
-				ReadFile.readFourthPage(myfile.getPath(),map, ENUM_CATEGORY.COST.code());
+//				ReadFile.readFourthPage(myfile.getPath(),map, ENUM_CATEGORY.COST.code());
 			}
 		}
-		System.out.println("读取完毕，执行写入操作！");
-		WriteFile.writeSecondPage(list_second, ouPath,ENUM_CATEGORY.LASTWEEK.code());
+		System.out.println("璇诲彇瀹屾瘯锛屾墽琛屽啓鍏ユ搷浣滐紒");
+//		WriteFile.writeSecondPage(list_second, ouPath,ENUM_CATEGORY.LASTWEEK.code());
 		WriteFile.writeThirdPage(list_third, ouPath,ENUM_CATEGORY.NEXTWEEK.code());
-		WriteFile.writeFourthPage(map, ouPath, ENUM_CATEGORY.COST.code());
+//		WriteFile.writeFourthPage(map, ouPath, ENUM_CATEGORY.COST.code());
 	}
 }

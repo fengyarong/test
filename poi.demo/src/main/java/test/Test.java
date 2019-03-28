@@ -19,7 +19,7 @@ import poi.dto.WorkTimeDto;
 public class Test {
 
 	public static void main(String[] args) throws Exception {
-//		String addresspath = "D:\\project_doc\\project-docs\\3_ÏîÄ¿¸ú×ÙÓë¼à¿Ø\\50_¸öÈËÖÜ±¨\\2019\\201903\\20190308";
+//		String addresspath = "D:\\project_doc\\project-docs\\3_é¡¹ç›®è·Ÿè¸ªä¸Žç›‘æŽ§\\50_ä¸ªäººå‘¨æŠ¥\\2019\\201903\\20190308";
 		String addresspath="D:/Config";
 		Map<String, WorkTimeDto> map = new HashMap<String, WorkTimeDto>();
 		File file = new File(addresspath);
@@ -73,15 +73,15 @@ public class Test {
 		if (cell == null) {
 			return "";
 		}
-		// Èç¹ûÊÇboolean
+		// å¦‚æžœæ˜¯boolean
 		if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
 			return String.valueOf(cell.getBooleanCellValue());
 		}
-		// Èç¹ûÊÇÊý×ÖÀàÐÍ
+		// å¦‚æžœæ˜¯æ•°å­—ç±»åž‹
 		if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
 			return String.valueOf(cell.getNumericCellValue());
 		}
-		// Èç¹ûÊÇStringÀàÐÍ
+		// å¦‚æžœæ˜¯Stringç±»åž‹
 		return String.valueOf(cell.getStringCellValue());
 	}
 }

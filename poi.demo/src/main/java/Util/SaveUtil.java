@@ -11,7 +11,7 @@ public class SaveUtil {
 	
 	public void SaveMethod(String object, XSSFCellStyle xssfCellStyle, XSSFCell xssfCell) {
 		if("".equals(object)){
-			xssfCell.setCellValue("¿Í»§ÆÀ¼Û£ºÂúÒâ");
+			xssfCell.setCellValue("å®¢æˆ·è¯„ä»·ï¼šæ»¡æ„");
 		}else if("1".equals(object)){
 			xssfCell.setCellValue("");
 		}else{
@@ -24,7 +24,7 @@ public class SaveUtil {
 		xssfCell.setCellValue(object);
 		XSSFCellStyle myxssf = (XSSFCellStyle) xssfCellStyle.clone();
 		if(DateUtil.jdugeBeforeDate(object)){
-			//Ìí¼Ó±³¾°É«ÎªºìÉ«
+			//æ·»åŠ èƒŒæ™¯è‰²ä¸ºçº¢è‰²
 			myxssf.setFillForegroundColor(IndexedColors.RED.getIndex());
 			myxssf.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		}
@@ -35,7 +35,7 @@ public class SaveUtil {
 		xssfCell.setCellValue(object);
 		XSSFCellStyle myxssf = (XSSFCellStyle) xssfCellStyle.clone();
 		if(DateUtil.jdugeAfterDate(object)){
-			//Ìí¼Ó±³¾°É«ÎªºìÉ«
+			//æ·»åŠ èƒŒæ™¯è‰²ä¸ºçº¢è‰²
 			myxssf.setFillForegroundColor(IndexedColors.RED.getIndex());
 			myxssf.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		}
@@ -46,7 +46,7 @@ public class SaveUtil {
 		xssfCell.setCellValue(object);
 		XSSFCellStyle myxssf = (XSSFCellStyle) xssfCellStyle.clone();
 		if(object>1.0){
-			//Ìí¼Ó±³¾°É«ÎªºìÉ«
+			//æ·»åŠ èƒŒæ™¯è‰²ä¸ºçº¢è‰²
 			myxssf.setFillForegroundColor(IndexedColors.RED.getIndex());
 			myxssf.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		}

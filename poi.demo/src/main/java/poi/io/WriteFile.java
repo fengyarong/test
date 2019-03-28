@@ -21,164 +21,189 @@ import poi.dto.XlsDto;
 
 public class WriteFile {
 
-	public static void writeSecondPage(HashSet<XlsDto> list, String ouPath, Integer integer) throws Exception {
-		CellUtil cellUtil =new CellUtil();
-		SaveUtil saveUtil =new SaveUtil();
-		
-		FileInputStream fs = new FileInputStream(ouPath);
-		XSSFWorkbook wb = new XSSFWorkbook(fs);
-		XSSFSheet sheet = wb.getSheetAt(integer);
-		CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(2));
-		XSSFRow row = sheet.getRow(0);
-		int lastRowNum = sheet.getLastRowNum();
-		FileOutputStream out = new FileOutputStream(ouPath);
-		for(XlsDto xlsDto:list){
-			row = sheet.createRow(++lastRowNum);
-			saveUtil.SaveMethod("1", tpye.getXssf0(), row.createCell(0));
-			saveUtil.SaveMethod(xlsDto.getType(), tpye.getXssf1(), row.createCell(1));
-			saveUtil.SaveMethod(xlsDto.getName(), tpye.getXssf2(), row.createCell(2));
-			saveUtil.SaveMethodBefore(xlsDto.getStardate(), tpye.getXssf3(), row.createCell(3));
-			saveUtil.SaveMethodBefore(xlsDto.getEnddate(), tpye.getXssf4(), row.createCell(4));
-			saveUtil.SaveMethod(xlsDto.getDays(), tpye.getXssf5(), row.createCell(5));
-			saveUtil.SaveMethod(xlsDto.getDutyperson(), tpye.getXssf6(), row.createCell(6));
-			saveUtil.SaveMethod(xlsDto.getLv(), tpye.getXssf7(), row.createCell(7));
-			saveUtil.SaveMethod(xlsDto.getDesc(), tpye.getXssf8(), row.createCell(8));
-		}
-		out.flush();
-		wb.write(out);
-		out.close();
-		fs.close();
-		System.out.println("Second–¥»ÎÕÍ±œ");
-	}
-	
-	public static void writeThirdPage(HashSet<XlsDto> list, String ouPath, Integer integer) throws Exception {
-		CellUtil cellUtil =new CellUtil();
-		SaveUtil saveUtil =new SaveUtil();
-		
-		FileInputStream fs = new FileInputStream(ouPath);
-		XSSFWorkbook wb = new XSSFWorkbook(fs);
-		XSSFSheet sheet = wb.getSheetAt(integer);
-		CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(2));
-		XSSFRow row = sheet.getRow(0);
-		int lastRowNum = sheet.getLastRowNum();
-		FileOutputStream out = new FileOutputStream(ouPath);
-		for(XlsDto xlsDto:list){
-			row = sheet.createRow(++lastRowNum);
-			saveUtil.SaveMethod("1", tpye.getXssf0(), row.createCell(0));
-			saveUtil.SaveMethod(xlsDto.getType(), tpye.getXssf1(), row.createCell(1));
-			saveUtil.SaveMethod(xlsDto.getName(), tpye.getXssf2(), row.createCell(2));
-			saveUtil.SaveMethodAfter(xlsDto.getStardate(), tpye.getXssf3(), row.createCell(3));
-			saveUtil.SaveMethodAfter(xlsDto.getEnddate(), tpye.getXssf4(), row.createCell(4));
-			saveUtil.SaveMethod(xlsDto.getDays(), tpye.getXssf5(), row.createCell(5));
-			saveUtil.SaveMethod(xlsDto.getDutyperson(), tpye.getXssf6(), row.createCell(6));
-			saveUtil.SaveMethod("1", tpye.getXssf7(), row.createCell(7));
-		}
-		out.flush();
-		wb.write(out);
-		out.close();
-		fs.close();
-		System.out.println("Third–¥»ÎÕÍ±œ");
-	}
-	
-	public static void writeFourthPage(Map<String, WorkTimeDto> map,String ouPath, Integer integer)throws Exception{
-		
-		Map<String,Integer> nameMap=new HashMap<String,Integer>();
-		
-		FileInputStream fs = new FileInputStream(ouPath);
-		XSSFWorkbook wb = new XSSFWorkbook(fs);
-		XSSFSheet sheet = wb.getSheetAt(integer);
-		XSSFRow row = sheet.getRow(1);
-		int lastCellNum = row.getLastCellNum();
-		for (int i = 1; i < lastCellNum; i++) {
-			if(row.getCell(i)!=null){
-				nameMap.put(StringUtil.getCellValue(row.getCell(i)), i);
-			}
-		}
-		//±È¿˙–Ë“™–¥»Îµƒ–’√˚£¨’“≥ˆ∆‰∂‘”¶µƒŒª÷√
-		FileOutputStream out = new FileOutputStream(ouPath);
-		for (String name : map.keySet()) {
-			Integer addnum = nameMap.get(name);
-			WorkTimeDto workTimeDto = map.get(name);
-			int num = DateUtil.getDaysFromStar()+4;
-			for (int i = num-7; i < num; i++) {
-				int ca=num-i;
-				XSSFCell cell = sheet.getRow(i).getCell(addnum);
-				switch (ca) {
-				case 7:
-					if(StringUtil.isNumeric(workTimeDto.getSunday())){
-						cell.setCellValue(Double.parseDouble(workTimeDto.getSunday()));
-					}else{
-						cell.setCellValue(workTimeDto.getSunday());
-					}
-					break;
-				case 6:
-					if(StringUtil.isNumeric(workTimeDto.getSaturday())){
-						cell.setCellValue(Double.parseDouble(workTimeDto.getSaturday()));
-					}else{
-						cell.setCellValue(workTimeDto.getSaturday());
-					}
-					break;
-				case 5:
-					if(StringUtil.isNumeric(workTimeDto.getFriday())){
-						cell.setCellValue(Double.parseDouble(workTimeDto.getFriday()));
-					}else{
-						cell.setCellValue(workTimeDto.getFriday());
-					}
-					break;
-				case 4:
-					if(StringUtil.isNumeric(workTimeDto.getThursday())){
-						cell.setCellValue(Double.parseDouble(workTimeDto.getThursday()));
-					}else{
-						cell.setCellValue(workTimeDto.getThursday());
-					}
-					break;
-				case 3:
-					if(StringUtil.isNumeric(workTimeDto.getWednesday())){
-						cell.setCellValue(Double.parseDouble(workTimeDto.getWednesday()));
-					}else{
-						cell.setCellValue(workTimeDto.getWednesday());
-					}
-					break;
-				case 2:
-					if(StringUtil.isNumeric(workTimeDto.getTuesday())){
-						cell.setCellValue(Double.parseDouble(workTimeDto.getTuesday()));
-					}else{
-						cell.setCellValue(workTimeDto.getTuesday());
-					}
-					break;
-				case 1:
-					if(StringUtil.isNumeric(workTimeDto.getMonday())){
-						cell.setCellValue(Double.parseDouble(workTimeDto.getMonday()));
-					}else{
-						cell.setCellValue(workTimeDto.getMonday());
-					}
-					break;	
-				}
-			}
-			
-		}
-		out.flush();
-		wb.write(out);
-		out.close();
-		fs.close();
-		System.out.println("Fourth–¥»ÎÕÍ±œ");
-	}
-	
-	public static void main(String[] args) {
-		String ouPath="D:\\Config\\LI-π˙±¶»À Ÿ-PMC-÷‹±®-20190301.xls";
-		int page=3;
-		WorkTimeDto w =new WorkTimeDto();
-		w.setMonday("9.2");
-		w.setTuesday("9.5");
-		w.setWednesday("9");
-		w.setThursday("9.8");
-		w.setFriday("«ÎºŸ");
-		Map<String, WorkTimeDto> map =new HashMap<String, WorkTimeDto>();
-		map.put("’‘’˛", w);
-		try {
-			writeFourthPage(map,ouPath,page);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    public static void writeSecondPage(HashSet<XlsDto> list, String ouPath, Integer integer) throws Exception {
+        CellUtil cellUtil = new CellUtil();
+        SaveUtil saveUtil = new SaveUtil();
+
+        FileInputStream fs = new FileInputStream(ouPath);
+        XSSFWorkbook wb = new XSSFWorkbook(fs);
+        XSSFSheet sheet = wb.getSheetAt(integer);
+        CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(2));
+        XSSFRow row = sheet.getRow(0);
+        int lastRowNum = sheet.getLastRowNum();
+        int star = 2;
+        FileOutputStream out = new FileOutputStream(ouPath);
+        try {
+            for (int i = star; i < lastRowNum; i++) {
+                row = sheet.getRow(i);
+                sheet.removeRow(row);
+            }
+
+            for (XlsDto xlsDto : list) {
+                row = sheet.createRow(star++);
+                saveUtil.SaveMethod("1", tpye.getXssf0(), row.createCell(0));
+                saveUtil.SaveMethod(xlsDto.getType(), tpye.getXssf1(), row.createCell(1));
+                saveUtil.SaveMethod(xlsDto.getName(), tpye.getXssf2(), row.createCell(2));
+                saveUtil.SaveMethodBefore(xlsDto.getStardate(), tpye.getXssf3(), row.createCell(3));
+                saveUtil.SaveMethodBefore(xlsDto.getEnddate(), tpye.getXssf4(), row.createCell(4));
+                saveUtil.SaveMethod(xlsDto.getDays(), tpye.getXssf5(), row.createCell(5));
+                saveUtil.SaveMethod(xlsDto.getDutyperson(), tpye.getXssf6(), row.createCell(6));
+                saveUtil.SaveMethod(xlsDto.getLv(), tpye.getXssf7(), row.createCell(7));
+                saveUtil.SaveMethod(xlsDto.getDesc(), tpye.getXssf8(), row.createCell(8));
+            }
+        } catch (Exception e) {
+            System.out.println("SecondÊúâ‰∏Ä‰∏™ÂºÇÂ∏∏Ôºö"+e.getMessage());
+        } finally {
+            wb.write(out);
+            out.flush();
+            out.close();
+            fs.close();
+            System.out.println("SecondÂÜôÂÖ•ÂÆåÊØï");
+        }
+    }
+
+    public static void writeThirdPage(HashSet<XlsDto> list, String ouPath, Integer integer) throws Exception {
+        CellUtil cellUtil = new CellUtil();
+        SaveUtil saveUtil = new SaveUtil();
+
+        FileInputStream fs = new FileInputStream(ouPath);
+        XSSFWorkbook wb = new XSSFWorkbook(fs);
+        XSSFSheet sheet = wb.getSheetAt(integer);
+        CellTypeDto tpye = cellUtil.getTpye(sheet.getRow(2));
+        XSSFRow row = sheet.getRow(0);
+        int lastRowNum = sheet.getLastRowNum();
+        int star = 2;
+        FileOutputStream out = new FileOutputStream(ouPath);
+        try {
+            for (int i = star; i < lastRowNum; i++) {
+                row = sheet.getRow(i);
+                sheet.removeRow(row);
+            }
+            for (XlsDto xlsDto : list) {
+                row = sheet.createRow(star++);
+                saveUtil.SaveMethod("1", tpye.getXssf0(), row.createCell(0));
+                saveUtil.SaveMethod(xlsDto.getType(), tpye.getXssf1(), row.createCell(1));
+                saveUtil.SaveMethod(xlsDto.getName(), tpye.getXssf2(), row.createCell(2));
+                saveUtil.SaveMethodAfter(xlsDto.getStardate(), tpye.getXssf3(), row.createCell(3));
+                saveUtil.SaveMethodAfter(xlsDto.getEnddate(), tpye.getXssf4(), row.createCell(4));
+                saveUtil.SaveMethod(xlsDto.getDays(), tpye.getXssf5(), row.createCell(5));
+                saveUtil.SaveMethod(xlsDto.getDutyperson(), tpye.getXssf6(), row.createCell(6));
+                saveUtil.SaveMethod("1", tpye.getXssf7(), row.createCell(7));
+            }
+        } catch (Exception e) {
+            System.out.println("ThirdÊúâ‰∏Ä‰∏™ÂºÇÂ∏∏:"+e.getMessage());
+        } finally {
+            wb.write(out);
+            out.flush();
+            out.close();
+            fs.close();
+            System.out.println("ThirdÂÜôÂÖ•ÂÆåÊØï");
+        }
+    }
+
+    public static void writeFourthPage(Map<String, WorkTimeDto> map, String ouPath, Integer integer) throws Exception {
+
+        Map<String, Integer> nameMap = new HashMap<String, Integer>();
+
+        FileInputStream fs = new FileInputStream(ouPath);
+        XSSFWorkbook wb = new XSSFWorkbook(fs);
+        XSSFSheet sheet = wb.getSheetAt(integer);
+        XSSFRow row = sheet.getRow(1);
+        int lastCellNum = row.getLastCellNum();
+        for (int i = 1; i < lastCellNum; i++) {
+            if (row.getCell(i) != null) {
+                nameMap.put(StringUtil.getCellValue(row.getCell(i)), i);
+            }
+        }
+        //ÈÅçÂéÜÈúÄË¶ÅÂÜôÂÖ•ÁöÑÂßìÂêçÔºåÊâæÂá∫ÂÖ∂ÂØπÂ∫îÁöÑ‰ΩçÁΩÆ
+        FileOutputStream out = new FileOutputStream(ouPath);
+        try {
+            for (String name : map.keySet()) {
+                Integer addnum = nameMap.get(name);
+                WorkTimeDto workTimeDto = map.get(name);
+                int num = DateUtil.getDaysFromStar() + 4;
+                for (int i = num - 7; i < num; i++) {
+                    int ca = num - i;
+                    XSSFCell cell = sheet.getRow(i).getCell(addnum);
+                    switch (ca) {
+                        case 7:
+                            if (StringUtil.isNumeric(workTimeDto.getSunday())) {
+                                cell.setCellValue(Double.parseDouble(workTimeDto.getSunday()));
+                            } else {
+                                cell.setCellValue(workTimeDto.getSunday());
+                            }
+                            break;
+                        case 6:
+                            if (StringUtil.isNumeric(workTimeDto.getSaturday())) {
+                                cell.setCellValue(Double.parseDouble(workTimeDto.getSaturday()));
+                            } else {
+                                cell.setCellValue(workTimeDto.getSaturday());
+                            }
+                            break;
+                        case 5:
+                            if (StringUtil.isNumeric(workTimeDto.getFriday())) {
+                                cell.setCellValue(Double.parseDouble(workTimeDto.getFriday()));
+                            } else {
+                                cell.setCellValue(workTimeDto.getFriday());
+                            }
+                            break;
+                        case 4:
+                            if (StringUtil.isNumeric(workTimeDto.getThursday())) {
+                                cell.setCellValue(Double.parseDouble(workTimeDto.getThursday()));
+                            } else {
+                                cell.setCellValue(workTimeDto.getThursday());
+                            }
+                            break;
+                        case 3:
+                            if (StringUtil.isNumeric(workTimeDto.getWednesday())) {
+                                cell.setCellValue(Double.parseDouble(workTimeDto.getWednesday()));
+                            } else {
+                                cell.setCellValue(workTimeDto.getWednesday());
+                            }
+                            break;
+                        case 2:
+                            if (StringUtil.isNumeric(workTimeDto.getTuesday())) {
+                                cell.setCellValue(Double.parseDouble(workTimeDto.getTuesday()));
+                            } else {
+                                cell.setCellValue(workTimeDto.getTuesday());
+                            }
+                            break;
+                        case 1:
+                            if (StringUtil.isNumeric(workTimeDto.getMonday())) {
+                                cell.setCellValue(Double.parseDouble(workTimeDto.getMonday()));
+                            } else {
+                                cell.setCellValue(workTimeDto.getMonday());
+                            }
+                            break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("FourthÊúâ‰∏Ä‰∏™ÂºÇÂ∏∏:"+e.getMessage());
+        } finally {
+            wb.write(out);
+            out.flush();
+            out.close();
+            fs.close();
+            System.out.println("FourthÂÜôÂÖ•ÂÆåÊØï");
+        }
+    }
+
+    public static void main(String[] args) {
+        String ouPath = "D:\\Config\\LI-ÂõΩÂÆù‰∫∫ÂØø-PMC-Âë®Êä•-20190301.xls";
+        int page = 3;
+        WorkTimeDto w = new WorkTimeDto();
+        w.setMonday("9.2");
+        w.setTuesday("9.5");
+        w.setWednesday("9");
+        w.setThursday("9.8");
+        w.setFriday("ËØ∑ÂÅá");
+        Map<String, WorkTimeDto> map = new HashMap<String, WorkTimeDto>();
+        map.put("ËµµÊîø", w);
+        try {
+            writeFourthPage(map, ouPath, page);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
