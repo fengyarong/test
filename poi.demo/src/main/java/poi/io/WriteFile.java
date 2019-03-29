@@ -34,7 +34,7 @@ public class WriteFile {
         int star = 2;
         FileOutputStream out = new FileOutputStream(ouPath);
         try {
-            for (int i = star; i < lastRowNum; i++) {
+            for (int i = star; i <= lastRowNum; i++) {
                 row = sheet.getRow(i);
                 sheet.removeRow(row);
             }
@@ -75,7 +75,7 @@ public class WriteFile {
         int star = 2;
         FileOutputStream out = new FileOutputStream(ouPath);
         try {
-            for (int i = star; i < lastRowNum; i++) {
+            for (int i = star; i <= lastRowNum; i++) {
                 row = sheet.getRow(i);
                 sheet.removeRow(row);
             }

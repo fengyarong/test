@@ -46,14 +46,14 @@ public class Controller {
 		for (File myfile : listFiles) {
 			if (myfile.isFile()) {
 				System.out.println("开始读取："+myfile.getName());
-//				ReadFile.readSecondPage(myfile.getPath(), list_second, ENUM_CATEGORY.LASTWEEK.code());
+				ReadFile.readSecondPage(myfile.getPath(), list_second, ENUM_CATEGORY.LASTWEEK.code());
 				ReadFile.readThirdPage(myfile.getPath(), list_third, ENUM_CATEGORY.NEXTWEEK.code());
-//				ReadFile.readFourthPage(myfile.getPath(),map, ENUM_CATEGORY.COST.code());
+				ReadFile.readFourthPage(myfile.getPath(),map, ENUM_CATEGORY.COST.code());
 			}
 		}
 		System.out.println("读取完毕，执行写入操作！");
-//		WriteFile.writeSecondPage(list_second, ouPath,ENUM_CATEGORY.LASTWEEK.code());
+		WriteFile.writeSecondPage(list_second, ouPath,ENUM_CATEGORY.LASTWEEK.code());
 		WriteFile.writeThirdPage(list_third, ouPath,ENUM_CATEGORY.NEXTWEEK.code());
-//		WriteFile.writeFourthPage(map, ouPath, ENUM_CATEGORY.COST.code());
+		WriteFile.writeFourthPage(map, ouPath, ENUM_CATEGORY.COST.code());
 	}
 }
