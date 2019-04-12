@@ -3,21 +3,21 @@ package poi.dto;
 import java.util.Date;
 
 public class XlsDto {
-	//ÈÎÎñÀàĞÍ
+	//ä»»åŠ¡ç±»å‹
 	private String type;
-	//ÈÎÎñÃû³Æ
+	//ä»»åŠ¡åç§°
 	private String name;
-	//¿ªÊ¼Ê±¼ä
+	//å¼€å§‹æ—¶é—´
 	private Date stardate;
-	//½áÊøÊ±¼ä
+	//ç»“æŸæ—¶é—´
 	private Date enddate;
-	//ºÄÊ±
+	//è€—æ—¶
 	private int days;
-	//ÔğÈÎÈË
+	//è´£ä»»äºº
 	private String dutyperson;
-	//Íê³É±ÈÀı
+	//å®Œæˆæ¯”ä¾‹
 	private double lv;
-	//¿Í»§ÂúÒâ¶È
+	//å®¢æˆ·æ»¡æ„åº¦
 	private String desc;
 	
 	@Override

@@ -1,9 +1,9 @@
 package ENUM;
 
 public enum ENUM_CATEGORY {
-	LASTWEEK(1,"上周完成任务"),
-	NEXTWEEK(2,"本周计划任务"),
-	COST(3,"成本管理");
+	LASTWEEK(1,"涓婂懆瀹屾垚浠诲姟"),
+	NEXTWEEK(2,"鏈懆璁″垝浠诲姟"),
+	COST(3,"鎴愭湰绠＄悊");
 	private final Integer code;
     private final String desc;
 
