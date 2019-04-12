@@ -43,7 +43,7 @@ public class ReadFile {
 						xls.setEnddate(cell.getDateCellValue());
 						break;
 					case 5:
-						xls.setDays(new Double(cell.getNumericCellValue()).intValue());
+						xls.setDays(new Double(cell.getNumericCellValue()));
 						break;
 					case 6:
 						xls.setDutyperson(cell.getStringCellValue());
@@ -66,6 +66,7 @@ public class ReadFile {
 		InputStream is = new FileInputStream(path);
 		XSSFWorkbook hw = new XSSFWorkbook(is);
 		Sheet sheet = hw.getSheetAt(page);
+		System.out.println("目前一共有："+sheet.getLastRowNum());
 		for (int i = 2; i <= sheet.getLastRowNum(); i++) {
 			Row row = sheet.getRow(i);
 			if (!"".equals(StringUtil.getCellValue(row.getCell(6)))) {
@@ -89,7 +90,7 @@ public class ReadFile {
 						xls.setEnddate(cell.getDateCellValue());
 						break;
 					case 5:
-						xls.setDays(new Double(cell.getNumericCellValue()).intValue());
+						xls.setDays(new Double(cell.getNumericCellValue()));
 						break;
 					case 6:
 						xls.setDutyperson(cell.getStringCellValue());

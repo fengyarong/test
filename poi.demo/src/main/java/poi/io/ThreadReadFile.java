@@ -38,6 +38,7 @@ public class ThreadReadFile implements Runnable {
     public void run() {
         try {
             System.out.println(Thread.currentThread().getName()+"获取并执行了一个任务。");
+            String name = path.substring(path.lastIndexOf("-") + 1, path.lastIndexOf("."));
             InputStream  is = new FileInputStream(path);
             XSSFWorkbook hw = new XSSFWorkbook(is);
 
@@ -47,6 +48,7 @@ public class ThreadReadFile implements Runnable {
 
             is.close();
             countDownLatch.countDown();
+            System.out.println(Thread.currentThread().getName()+"执行任务结束。");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,7 +78,7 @@ public class ThreadReadFile implements Runnable {
                             xls.setEnddate(cell.getDateCellValue());
                             break;
                         case 5:
-                            xls.setDays(new Double(cell.getNumericCellValue()).intValue());
+                            xls.setDays(new Double(cell.getNumericCellValue()));
                             break;
                         case 6:
                             xls.setDutyperson(cell.getStringCellValue());
@@ -118,7 +120,7 @@ public class ThreadReadFile implements Runnable {
                             xls.setEnddate(cell.getDateCellValue());
                             break;
                         case 5:
-                            xls.setDays(new Double(cell.getNumericCellValue()).intValue());
+                            xls.setDays(new Double(cell.getNumericCellValue()));
                             break;
                         case 6:
                             xls.setDutyperson(cell.getStringCellValue());
@@ -162,6 +164,7 @@ public class ThreadReadFile implements Runnable {
                     break;
             }
         }
+        System.out.println("姓名："+name+",work:"+workDto);
         map.put(name, workDto);
     }
 }

@@ -50,12 +50,11 @@ public class Controller {
 		myObject.setFourth(map);
 
 		File file = new File(inPath);
-		System.out.println("请求地址:"+inPath);
 		File[] listFiles = file.listFiles();
 
 		CountDownLatch countDownLatch =new CountDownLatch(listFiles.length);
+		System.out.println("当前文件一共有:"+listFiles.length);
 		ExecutorService executorService = Executors.newFixedThreadPool(5);
-
 		for (File myfile : listFiles) {
 			if (myfile.isFile()) {
 				System.out.println("开始读取："+myfile.getName());
@@ -66,6 +65,7 @@ public class Controller {
 				executorService.submit(threadReadFile);
 			}
 		}
+		countDownLatch.countDown();
 		System.out.println("等待读取完毕!");
 		countDownLatch.await();
 		System.out.println("读取完毕，执行写入操作！");
