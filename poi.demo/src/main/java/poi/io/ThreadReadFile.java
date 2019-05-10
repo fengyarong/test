@@ -37,8 +37,8 @@ public class ThreadReadFile implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println(Thread.currentThread().getName()+"获取并执行了一个任务。");
             String name = path.substring(path.lastIndexOf("-") + 1, path.lastIndexOf("."));
+            System.out.println(Thread.currentThread().getName()+"获取并执行了一个任务："+name);
             InputStream  is = new FileInputStream(path);
             XSSFWorkbook hw = new XSSFWorkbook(is);
 
@@ -48,7 +48,7 @@ public class ThreadReadFile implements Runnable {
 
             is.close();
             countDownLatch.countDown();
-            System.out.println(Thread.currentThread().getName()+"执行任务结束。");
+            System.out.println(Thread.currentThread().getName()+"执行任务结束："+name);
         } catch (IOException e) {
             e.printStackTrace();
         }
